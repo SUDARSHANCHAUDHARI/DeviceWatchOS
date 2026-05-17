@@ -1,0 +1,42 @@
+[
+  {
+    "evidence": {
+      "available_kb": 102400,
+      "total_kb": 2048000,
+      "used_percent": 95.0
+    },
+    "kind": "health.memory_high",
+    "severity": "high",
+    "summary": "Memory usage is above the configured threshold."
+  },
+  {
+    "evidence": {
+      "cpu_count": 2,
+      "load_15m": 1.2,
+      "load_1m": 5.5,
+      "load_5m": 2.1
+    },
+    "kind": "health.cpu_load_high",
+    "severity": "medium",
+    "summary": "One-minute CPU load is unusually high for this device."
+  },
+  {
+    "evidence": {
+      "args": "python reverse tunnel client",
+      "command": "python",
+      "pid": "777",
+      "user": "kiosk"
+    },
+    "kind": "security.suspicious_process",
+    "severity": "high",
+    "summary": "Process command line matches a suspicious pattern."
+  },
+  {
+    "evidence": {
+      "usb_count": 1
+    },
+    "kind": "security.usb_present",
+    "severity": "low",
+    "summary": "USB devices are present and should be checked against the expected baseline."
+  }
+]

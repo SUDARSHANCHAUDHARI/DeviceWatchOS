@@ -1,0 +1,50 @@
+{
+  "captured_at": "2026-05-17T10:00:00+00:00",
+  "cpu": {
+    "cpu_count": 2,
+    "load_15m": 1.2,
+    "load_1m": 5.5,
+    "load_5m": 2.1
+  },
+  "device_id": "kiosk-01",
+  "heartbeat": {
+    "status": "online"
+  },
+  "memory": {
+    "available_kb": 102400,
+    "total_kb": 2048000,
+    "used_percent": 95.0
+  },
+  "network": {
+    "interface_count": 2,
+    "interfaces": [
+      {
+        "name": "eth0",
+        "rx_bytes": 10000,
+        "tx_bytes": 5000
+      }
+    ]
+  },
+  "platform": "Linux",
+  "processes": [
+    {
+      "args": "/usr/bin/chrome --kiosk",
+      "command": "chrome",
+      "pid": "100",
+      "user": "kiosk"
+    },
+    {
+      "args": "python reverse tunnel client",
+      "command": "python",
+      "pid": "777",
+      "user": "kiosk"
+    }
+  ],
+  "usb": [
+    {
+      "device": "1-1",
+      "product": "5678",
+      "vendor": "1234"
+    }
+  ]
+}
