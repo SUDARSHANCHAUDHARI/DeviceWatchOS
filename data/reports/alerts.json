@@ -1,6 +1,15 @@
 [
   {
     "evidence": {
+      "status": "online",
+      "uptime_seconds": 420
+    },
+    "kind": "health.reboot_recent",
+    "severity": "medium",
+    "summary": "Device rebooted recently and should be checked against the expected maintenance window."
+  },
+  {
+    "evidence": {
       "available_kb": 102400,
       "total_kb": 2048000,
       "used_percent": 95.0
@@ -30,6 +39,18 @@
     "kind": "security.suspicious_process",
     "severity": "high",
     "summary": "Process command line matches a suspicious pattern."
+  },
+  {
+    "evidence": {
+      "local_address": "10.10.20.15",
+      "local_port": 49152,
+      "remote_address": "198.51.100.77",
+      "remote_port": 4444,
+      "state": "ESTABLISHED"
+    },
+    "kind": "security.unusual_outbound",
+    "severity": "high",
+    "summary": "Established outbound connection uses a port that should be reviewed."
   },
   {
     "evidence": {

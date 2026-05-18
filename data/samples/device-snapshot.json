@@ -8,7 +8,8 @@
   },
   "device_id": "kiosk-01",
   "heartbeat": {
-    "status": "online"
+    "status": "online",
+    "uptime_seconds": 420
   },
   "memory": {
     "available_kb": 102400,
@@ -16,6 +17,15 @@
     "used_percent": 95.0
   },
   "network": {
+    "connections": [
+      {
+        "local_address": "10.10.20.15",
+        "local_port": 49152,
+        "remote_address": "198.51.100.77",
+        "remote_port": 4444,
+        "state": "ESTABLISHED"
+      }
+    ],
     "interface_count": 2,
     "interfaces": [
       {

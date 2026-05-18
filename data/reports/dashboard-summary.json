@@ -1,0 +1,64 @@
+{
+  "alert_count": 6,
+  "captured_at": "2026-05-17T10:00:00+00:00",
+  "device_id": "kiosk-01",
+  "heartbeat_status": "online",
+  "risk_score": 100,
+  "severity_counts": {
+    "critical": 0,
+    "high": 3,
+    "low": 1,
+    "medium": 2
+  },
+  "telemetry": {
+    "cpu": {
+      "cpu_count": 2,
+      "load_15m": 1.2,
+      "load_1m": 5.5,
+      "load_5m": 2.1
+    },
+    "memory": {
+      "available_kb": 102400,
+      "total_kb": 2048000,
+      "used_percent": 95.0
+    },
+    "network_interface_count": 2,
+    "process_count": 2,
+    "usb_count": 1
+  },
+  "top_alerts": [
+    {
+      "evidence": {
+        "available_kb": 102400,
+        "total_kb": 2048000,
+        "used_percent": 95.0
+      },
+      "kind": "health.memory_high",
+      "severity": "high",
+      "summary": "Memory usage is above the configured threshold."
+    },
+    {
+      "evidence": {
+        "args": "python reverse tunnel client",
+        "command": "python",
+        "pid": "777",
+        "user": "kiosk"
+      },
+      "kind": "security.suspicious_process",
+      "severity": "high",
+      "summary": "Process command line matches a suspicious pattern."
+    },
+    {
+      "evidence": {
+        "local_address": "10.10.20.15",
+        "local_port": 49152,
+        "remote_address": "198.51.100.77",
+        "remote_port": 4444,
+        "state": "ESTABLISHED"
+      },
+      "kind": "security.unusual_outbound",
+      "severity": "high",
+      "summary": "Established outbound connection uses a port that should be reviewed."
+    }
+  ]
+}

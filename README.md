@@ -58,14 +58,32 @@ python3 -m unittest discover -s tests -p 'test_*.py'
 
 - Collects local heartbeat, CPU, memory, network, process, and USB telemetry.
 - Analyzes high memory usage and unusual CPU load.
+- Flags recent reboot signals for maintenance-window review.
 - Flags suspicious process command lines.
+- Flags suspicious established outbound connections.
 - Flags USB presence for baseline review.
-- Writes JSON snapshots, JSON alerts, and a Markdown device report.
+- Builds a dashboard summary with risk score and severity counts.
+- Writes JSON snapshots, alerts, dashboard summary, device report, and alert timeline.
+
+## Demo Artifacts
+
+- [Architecture](docs/ARCHITECTURE.md)
+- [Security notes](docs/SECURITY_NOTES.md)
+- [Production readiness](docs/PRODUCTION_READINESS.md)
+- [Sample device report](data/reports/report.md)
+- [Sample alert timeline](data/reports/alert-timeline.md)
+- [Sample dashboard summary](data/reports/dashboard-summary.json)
+
+## Docker Demo
+
+```bash
+docker compose run --rm devicewatch-demo
+```
 
 ## Roadmap
 
-- Polish sample output screenshots or terminal demos
-- Add architecture diagram and deeper implementation notes
-- Expand test coverage around edge cases
-- Add Docker or local demo workflow where useful
-- Prepare `v0.1.0-mvp` release notes
+- Add signed agent enrollment and per-device baseline approval.
+- Add FastAPI ingestion routes backed by PostgreSQL.
+- Add React dashboard for fleet health, alert timeline, and device detail views.
+- Add policy packs for kiosk, signage player, Raspberry Pi, and Linux server profiles.
+- Prepare GitHub release `v0.1.0-mvp`.
