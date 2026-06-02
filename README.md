@@ -1,102 +1,122 @@
 # DeviceWatch OS
 
-[![Python](https://img.shields.io/badge/Python-3.12-blue)](#) [![Status](https://img.shields.io/badge/status-MVP-green)](#) [![Security](https://img.shields.io/badge/security-defensive%20lab-purple)](#)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](#requirements)
+[![Status](https://img.shields.io/badge/status-MVP-green)](#status)
+[![Security](https://img.shields.io/badge/security-defensive%20lab-purple)](#safe-use)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Security and health monitoring MVP for Linux devices, kiosks, signage players, and edge systems.
+Security and health monitoring agent for Linux devices, kiosks, digital signage players, and edge systems. Collects CPU, memory, network, processes, and USB telemetry into a structured snapshot for analysis.
 
-- **Portfolio group:** Product-style SaaS project
-- **Status:** MVP implemented, tested, committed, and pushed to GitHub
-- **GitHub:** https://github.com/SUDARSHANCHAUDHARI/DeviceWatchOS
-- **Local path:** `/Users/screencloudsudarshan/SUDARSHAN_CODE/sudarshan_repos/CyberSecurity/DeviceWatchOS`
+---
 
-## MVP Snapshot
+## Overview
 
-This repository includes a working MVP with safe sample data, deterministic detection or analysis logic, local tests, and generated output reports where relevant. It is ready for README/demo polish or deeper product work.
+DeviceWatch OS is a defensive monitoring agent that runs locally on a Linux device and captures a security-relevant snapshot: CPU/memory pressure, network connections, running processes, USB device list, and OS metadata. The snapshot is written as JSON for downstream analysis or shipped to a central collector. Useful for fleet operators managing kiosks, signage, and unattended Linux devices.
 
-## Safe Use
+The current MVP is a Python CLI agent. A FastAPI + React management dashboard is scaffolded under `apps/` for future development.
 
-This project is defensive and analysis-focused. Use only with logs, systems, repositories, and lab environments you own or have permission to assess.
+## Features
 
-## Core Features
+- Collects CPU and memory usage
+- Lists network interfaces and active connections
+- Enumerates running processes with command lines
+- Lists connected USB devices
+- Captures OS, hostname, and kernel metadata
+- Writes structured JSON snapshot for offline analysis
+- Builds Markdown summary and dashboard JSON
 
-- device heartbeat
-- reboot tracking
-- CPU/RAM/network usage
-- suspicious process detection
-- USB event detection
-- alert dashboard
+## Requirements
 
-## Suggested Stack
+- Python 3.10 or newer
+- Linux (full feature support); macOS / Windows (partial)
+- No third-party Python packages (standard library only)
+- Optional: Docker for the demo container
 
-Python agent, FastAPI, React, PostgreSQL, Docker.
-
-## Status
-
-Working CLI MVP.
-
-
-## Install
+## Installation
 
 ```bash
+git clone https://github.com/SUDARSHANCHAUDHARI/DeviceWatchOS.git
+cd DeviceWatchOS
 pip install .
 ```
 
-This registers the `device-watch` command. Or run directly:
+This registers the `device-watch` CLI command.
+
+To run without installing:
 
 ```bash
 python3 main.py --help
 ```
 
-## Quick Start
+## Usage
 
-Analyze the included sample snapshot:
-
-```bash
-python3 -m agent.main --sample data/samples/device-snapshot.json --out-dir data/reports
-```
-
-Collect and analyze the local machine:
+Capture a device snapshot using the bundled sample data:
 
 ```bash
-python3 -m agent.main --out-dir data/reports
+python3 main.py --sample data/samples/device-snapshot.json --out-dir reports
 ```
 
-Run tests:
+Generated outputs in `reports/`:
+
+- `snapshot.json` — raw collected telemetry
+- `summary.json` — dashboard-friendly summary
+- `report.md` — Markdown health and security report
+
+## Project Structure
+
+```
+DeviceWatchOS/
+├── agent/          Telemetry collectors and snapshot builder
+│   ├── collectors/ CPU, memory, network, processes, USB
+│   └── main.py     Agent entry
+├── apps/
+│   ├── api/        FastAPI app scaffold (planned)
+│   └── web/        React/Next.js app scaffold (planned)
+├── data/           Safe sample snapshots
+├── docker/         Dockerfile + compose support
+├── docs/           Architecture, security, demo notes
+├── scripts/        Setup, seed, run helpers
+├── tests/          Unit and integration tests
+├── main.py         CLI entrypoint
+├── pyproject.toml  Package metadata
+└── LICENSE
+```
+
+## Testing
 
 ```bash
 python3 -m unittest discover -s tests -p 'test_*.py'
 ```
 
-## MVP Capabilities
-
-- Collects local heartbeat, CPU, memory, network, process, and USB telemetry.
-- Analyzes high memory usage and unusual CPU load.
-- Flags recent reboot signals for maintenance-window review.
-- Flags suspicious process command lines.
-- Flags suspicious established outbound connections.
-- Flags USB presence for baseline review.
-- Builds a dashboard summary with risk score and severity counts.
-- Writes JSON snapshots, alerts, dashboard summary, device report, and alert timeline.
-
-## Demo Artifacts
-
-- [Architecture](docs/ARCHITECTURE.md)
-- [Security notes](docs/SECURITY_NOTES.md)
-- [Production readiness](docs/PRODUCTION_READINESS.md)
-- [Sample device report](data/reports/report.md)
-- [Sample alert timeline](data/reports/alert-timeline.md)
-- [Sample dashboard summary](data/reports/dashboard-summary.json)
-
 ## Docker Demo
 
 ```bash
-docker compose run --rm devicewatch-demo
+docker compose run --rm api
 ```
+
+## Safe Use
+
+This project is defensive and analysis-focused. Run only on devices and lab environments you own or have explicit written permission to monitor.
+
+## Status
+
+Working Python CLI agent MVP. Web dashboard scaffold present but not yet implemented.
 
 ## Roadmap
 
-- Add signed agent enrollment and per-device baseline approval.
-- Add FastAPI ingestion routes backed by PostgreSQL.
-- Add React dashboard for fleet health, alert timeline, and device detail views.
-- Add policy packs for kiosk, signage player, Raspberry Pi, and Linux server profiles.
-- Prepare GitHub release `v0.1.0-mvp`.
+- Live snapshot mode reading real `/proc`, `/sys`, and `lsusb`
+- Baseline diffing across snapshots
+- Scheduled snapshot uploads to a central collector
+- Web dashboard for fleet health
+- TLS-secured snapshot ingest API
+
+## License
+
+Released under the [MIT License](LICENSE). You are free to use, modify, and distribute this software with attribution.
+
+## Author
+
+**Sudarshan Chaudhari** — [SudarshanTechLabs](https://github.com/SUDARSHANCHAUDHARI)
+Bangkok, Thailand
+
+For inquiries: open an issue on [GitHub](https://github.com/SUDARSHANCHAUDHARI/DeviceWatchOS/issues).
