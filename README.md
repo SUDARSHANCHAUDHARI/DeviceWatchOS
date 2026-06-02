@@ -34,6 +34,19 @@ Python agent, FastAPI, React, PostgreSQL, Docker.
 
 Working CLI MVP.
 
+
+## Install
+
+```bash
+pip install .
+```
+
+This registers the `device-watch` command. Or run directly:
+
+```bash
+python3 main.py --help
+```
+
 ## Quick Start
 
 Analyze the included sample snapshot:
