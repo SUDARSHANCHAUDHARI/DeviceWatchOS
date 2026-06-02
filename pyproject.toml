@@ -11,4 +11,4 @@ license = { file = "LICENSE" }
 requires-python = ">=3.10"
 
 [project.scripts]
-device-watch = "apps.api.app.cli:main"
+device-watch = "agent.main:main"
